@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - '5432:5432'
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: passw0rd
+  
+  mlflow:
+    build: ./mlflow-ui/
+    depends_on:
+      - db
+    ports:
+      - '4444:5000'
+    restart: always
+    links:
+      - "db:database"
