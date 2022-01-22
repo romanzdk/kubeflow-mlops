@@ -7,7 +7,7 @@ pool:
 steps:
 - task: KubeflowUploadPipeline@0
   inputs:
-    kubeflowEndpoint: 'http://cz-prgdas083.cee.ema.ad.pwcinternal.com:30001'
+    kubeflowEndpoint: 'http://cz-prgdas083.cee.ema.ad.pwcinternal.com:30001/'
     kubeflowPipelineTask: 'uploadNew'
     pipelineFilePath: 'hello_kf.tar.gz'
     newPipelineName: 'Hello_Kubeflow'
