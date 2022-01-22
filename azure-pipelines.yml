@@ -5,6 +5,16 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'pip install kfp'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'dsl-compile --py hello_kf.py --output hello_kf.tar.gz'
+    
 - task: KubeflowUploadPipeline@0
   inputs:
     kubeflowEndpoint: '$(host)'
