@@ -2,3 +2,4 @@ conf.ini
 __pycache__
 metadata/database/data
 mlruns
+metadata/artifacts
