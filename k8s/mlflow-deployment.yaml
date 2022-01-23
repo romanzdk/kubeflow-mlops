@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+  namespace: rzydyk001
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+      - name: mlflow
+        image: acrname.azurecr.io/mlflow:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        envFrom:
+        - secretRef:
+            name: db-creds
+        - secretRef:
+            name: azure-creds
+      imagePullSecrets:
+        - name: regcred
