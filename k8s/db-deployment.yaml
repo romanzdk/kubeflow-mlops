@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mlflow-db
-        image: acrname.azurecr.io/db:latest
+        image: acrname.azurecr.io/kubeflow/mlflow-db:latest
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: db-data
@@ -27,7 +27,9 @@ spec:
           protocol: TCP
         envFrom:
           - secretRef:
-            name: db-creds
+              name: db-creds
+          - configMapRef:
+              name: db-config
       imagePullSecrets:
       - name: regcred
       volumes:

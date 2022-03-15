@@ -15,10 +15,21 @@ spec:
     spec:
       containers:
       - name: mlflow
-        image: acrname.azurecr.io/mlflow:latest
+        image: acrname.azurecr.io/kubeflow/mlflow:latest
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1Gi"
+        volumeMounts:
+        - mountPath: /home
+          name: artifact-store
+          subPath: .
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: 5000
         envFrom:
         - secretRef:
             name: db-creds
@@ -26,3 +37,7 @@ spec:
             name: azure-creds
       imagePullSecrets:
         - name: regcred
+      volumes:
+      - name: artifact-store
+        persistentVolumeClaim:
+          claimName: artifact-store

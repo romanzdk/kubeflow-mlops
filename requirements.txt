@@ -1,1 +1,4 @@
 kfp
+azure-storage-blob
+azure-cli-storage
+azure-identity
